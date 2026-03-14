@@ -1,0 +1,252 @@
+body{
+    font-family:"Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container{
+    flex: 1;
+}
+
+.navbar{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color:red;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: black !important;
+}
+
+.f-info-links a{
+    text-decoration: none;
+    color: #222;
+}
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+.f-info-links,.f-info-brand,.f-info-socials{
+    width: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.f-info-socials i{
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.f-info{
+    height:8rem;
+    background-color: #ebebeb;
+    display: flex;
+    justify-content: center;
+    align-items: space-evenly;
+    flex-wrap:wrap;
+    text-align: center;
+}
+
+/* Smooth hover animation */
+.listing-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Opacity + slight lift effect */
+.listing-card:hover {
+    opacity: 0.85;
+    transform: translateY(-5px);
+}
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+.review-card{
+    transition: all 0.3s ease;
+}
+
+.review-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* Review Card */
+.review-card{
+    border-radius:12px;
+    border:1px solid #e6e6e6;
+    background-color:white;
+    transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.review-card:hover{
+    transform: translateY(-4px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Reviewer name */
+.review-card h6{
+    font-weight:600;
+    font-size:15px;
+}
+
+/* Comment text */
+.review-comment{
+    font-size:14px;
+    color:#555;
+    margin-bottom:0;
+}
+
+/* Star styling */
+.stars{
+    font-size:18px;
+}
+
+.star{
+    color:#f4b400; /* gold stars */
+}
+
+.star-empty{
+    color:#ccc;
+}
+
+/* REVIEW FORM CARD */
+
+.review-form-card{
+    border-radius:12px;
+    border:1px solid #e6e6e6;
+}
+
+.review-form-card textarea{
+    resize:none;
+}
+
+/* REVIEW CARDS */
+
+.review-card{
+    border-radius:10px;
+    border:1px solid #e0e0e0;
+    transition:all 0.25s ease;
+}
+
+.review-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* STAR RATING */
+
+.star{
+    color:#f4b400;
+    font-size:18px;
+}
+
+.star-empty{
+    color:#ccc;
+    font-size:18px;
+}
+
+/* REVIEW TEXT */
+
+.review-comment{
+    color:#555;
+    font-size:14px;
+}
+
+.navbar-brand i {
+    color: #fe424d;
+    font-size: 1.75rem;
+}
+
+.star-rating {
+  direction: rtl;
+  display: inline-flex;
+  font-size: 28px;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  color: #ddd;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.star-rating input:checked ~ label {
+  color: #ff385c;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ff385c;
+}
+
+.rating-error{
+  display:none;
+}
+
+#map{
+height:400px;
+width:100%;
+border-radius:10px;
+margin-top:20px;
+}
+
+.filters{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:35px;
+overflow-x:auto;
+padding:15px 0;
+width:100%;
+}
+
+.filter{
+text-align:center;
+text-decoration:none;
+color:#444;
+font-size:14px;
+transition:all 0.2s ease;
+}
+
+.filter i{
+font-size:22px;
+color:#ff385c;   /* Airbnb style color */
+margin-bottom:5px;
+display:block;
+}
+
+.filter:hover{
+color:black;
+}
+
+.filter:hover i{
+color:black;
+}
+
+.filter.active{
+color:black;
+border-bottom:2px solid black;
+padding-bottom:6px;
+}
+
+.booking-box{
+border:1px solid #ddd;
+border-radius:10px;
+padding:20px;
+}

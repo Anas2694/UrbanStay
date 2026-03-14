@@ -1,0 +1,215 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container mt-4 mb-5">
+  <div class="row">
+    <div class="col-8 offset-2">
+
+      <h3 class="mb-4">Edit Listing</h3>
+
+      <form 
+        method="POST"
+        action="/listings/<%= listing._id %>?_method=PUT"
+        enctype="multipart/form-data"
+        novalidate
+        class="needs-validation">
+
+        <!-- Title -->
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input 
+            name="listing[title]" 
+            value="<%= listing.title %>" 
+            type="text"
+            class="form-control"
+            required>
+          <div class="valid-feedback">Title looks good!</div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea 
+            name="listing[description]"
+            class="form-control"
+            rows="3"
+            required><%= listing.description %></textarea>
+          <div class="invalid-feedback">Description is required!</div>
+        </div>
+
+        <!-- Current Image -->
+        <div class="mb-3">
+          <label class="form-label">Current Image</label><br>
+
+          <img 
+            src="<%= listing.image.url %>"
+            style="height:200px; border-radius:8px;"
+            class="mb-3"
+          >
+        </div>
+
+        <!-- Upload New Image -->
+        <div class="mb-3">
+
+  <label class="form-label">Upload New Image</label>
+
+  <input 
+    type="file"
+    name="listing[image]"
+    id="imageUpload"
+    class="form-control"
+    accept="image/*">
+
+</div>
+
+<!-- Preview Image -->
+<div class="mb-3">
+
+  <img 
+    id="imagePreview"
+    src="<%= listing.image.url %>"
+    style="height:200px; border-radius:8px;"
+  >
+
+</div>
+
+        <!-- Location -->
+        <div class="mb-3">
+          <label class="form-label">Location</label>
+          <input 
+            name="listing[location]" 
+            value="<%= listing.location %>" 
+            type="text"
+            class="form-control"
+            required>
+          <div class="invalid-feedback">Location is required!</div>
+        </div>
+
+        <!-- Country + Price -->
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Country</label>
+            <input 
+              name="listing[country]" 
+              value="<%= listing.country %>" 
+              type="text"
+              class="form-control"
+              required>
+            <div class="invalid-feedback">Country is required!</div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Price (₹ per night)</label>
+            <input 
+              name="listing[price]" 
+              value="<%= listing.price %>" 
+              type="number"
+              class="form-control"
+              required>
+            <div class="invalid-feedback">Price is required!</div>
+          </div>
+
+        </div>
+<div class="mb-3">
+
+
+<div class="form-check">
+<input class="form-check-input"
+type="checkbox"
+name="listing[category][]"
+value="farms"
+<%= listing.category.includes("farms") ? "checked" : "" %>>
+
+<label class="form-check-label">Farms</label>
+</div>
+
+<div class="form-check">
+<input class="form-check-input"
+type="checkbox"
+name="listing[category][]"
+value="cabins"
+<%= listing.category.includes("cabins") ? "checked" : "" %>>
+
+<label class="form-check-label">Cabins</label>
+</div>
+
+<div class="form-check">
+<input class="form-check-input"
+type="checkbox"
+name="listing[category][]"
+value="views"
+<%= listing.category.includes("views") ? "checked" : "" %>>
+
+<label class="form-check-label">Amazing Views</label>
+</div>
+
+<div class="form-check">
+<input class="form-check-input"
+type="checkbox"
+name="listing[category][]"
+value="beach"
+<%= listing.category.includes("beach") ? "checked" : "" %>>
+
+<label class="form-check-label">Beach</label>
+</div>
+
+<div class="form-check">
+<input class="form-check-input"
+type="checkbox"
+name="listing[category][]"
+value="pools"
+<%= listing.category.includes("pools") ? "checked" : "" %>>
+
+<label class="form-check-label">Pools</label>
+</div>
+
+</div>
+
+<div class="form-check mt-3">
+
+<input
+class="form-check-input"
+type="checkbox"
+name="listing[trending]"
+value="true"
+id="trendingCheck"
+<%= listing.trending ? "checked" : "" %>>
+
+<label class="form-check-label" for="trendingCheck">
+🔥 Mark as Trending
+</label>
+
+</div>
+
+        <button class="btn btn-dark add-btn">
+          Update Listing
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+const imageUpload = document.getElementById("imageUpload");
+const imagePreview = document.getElementById("imagePreview");
+
+imageUpload.addEventListener("change", function(){
+
+  const file = this.files[0];
+
+  if(file){
+    const reader = new FileReader();
+
+    reader.addEventListener("load", function(){
+      imagePreview.src = this.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
+
+});
+
+</script>
