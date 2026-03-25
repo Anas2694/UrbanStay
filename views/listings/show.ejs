@@ -54,7 +54,7 @@ const listingTitle = "<%= listing.title %>";
 
 <h5>Book this stay</h5>
 
-<form method="POST" action="/bookings/<%= listing._id %>">
+<form method="POST" action="/bookings/<%= listing._id %>" onsubmit="console.log('FORM SUBMITTED')">
 
 <div class="row mt-3">
 
@@ -85,8 +85,8 @@ const listingTitle = "<%= listing.title %>";
 
 </div>
 
-<button class="btn btn-dark mt-2">
-Confirm Booking
+<button type="submit" class="btn btn-dark mt-2">
+  Confirm Booking
 </button>
 
 </form>

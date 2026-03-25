@@ -15,7 +15,7 @@ module.exports = (eventBus) => {
           <p><b>Location:</b> ${listing.location}</p>
           <p><b>Check-in:</b> ${booking.checkin}</p>
           <p><b>Check-out:</b> ${booking.checkout}</p>
-          <p><b>Total:</b> ₹${booking.totalPrice}</p>
+         <p><b>Total:</b> ₹${Number(booking.total).toFixed(0)}</p>
         `,
       });
       console.log('Confirmation email sent to', user.email);

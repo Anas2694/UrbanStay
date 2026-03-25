@@ -3,53 +3,56 @@ const router = express.Router();
 const Booking = require("../models/bookings");
 const Listing = require("../models/listings");
 const { isLoggedIn } = require("../middleware");
+const eventBus = require('../utils/eventBus');
 
 router.post("/:id", isLoggedIn, async (req, res) => {
 
-const { id } = req.params;
+  const { id } = req.params;
 
-const listing = await Listing.findById(id);
+  const listing = await Listing.findById(id);
 
-if(!listing){
-req.flash("error","Listing not found");
-return res.redirect("/listings");
-}
+  if(!listing){
+    req.flash("error","Listing not found");
+    return res.redirect("/listings");
+  }
 
-const { checkin, checkout } = req.body;
+  const { checkin, checkout } = req.body;
 
-const start = new Date(checkin);
-const end = new Date(checkout);
+  const start = new Date(checkin);
+  const end = new Date(checkout);
 
-const nights = (end-start)/(1000*60*60*24);
+  const nights = (end-start)/(1000*60*60*24);
 
-if(nights<=0){
-req.flash("error","Checkout must be after check-in");
-return res.redirect(`/listings/${id}`);
-}
+  if(nights<=0){
+    req.flash("error","Checkout must be after check-in");
+    return res.redirect(`/listings/${id}`);
+  }
 
-const subtotal = nights * listing.price;
-const tax = subtotal * 0.18;
-const total = subtotal + tax;
+  const subtotal = nights * listing.price;
+  const tax = subtotal * 0.18;
+  const total = subtotal + tax;
 
-const booking = new Booking({
-listing:id,
-user:req.user._id,
-checkin,
-checkout,
-nights,
-subtotal,
-tax,
-total
-});
+  const booking = new Booking({
+    listing: id,
+    user: req.user._id,
+    checkin,
+    checkout,
+    nights,
+    subtotal,
+    tax,
+    total
+  });
 
-await booking.save();
+  await booking.save();
+  console.log('Booking saved, emitting event...');
+  console.log('User email:', req.user.email);
+  console.log('Listing title:', listing.title);
 
-const eventBus = require('../utils/eventBus');
-const listingData = await Listing.findById(req.params.id);
-eventBus.emit('booking.created', { booking: newBooking, user: req.user, listing: listingData });
-req.flash("success","Booking confirmed!");
+  eventBus.emit('booking.created', { booking, user: req.user, listing });
+  console.log('Event emitted!');
 
-res.redirect(`/listings/${id}`);
+  req.flash("success","Booking confirmed!");
+  res.redirect(`/listings/${id}`);
 
 });
 
