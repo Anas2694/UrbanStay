@@ -44,6 +44,9 @@ total
 
 await booking.save();
 
+const eventBus = require('../utils/eventBus');
+const listingData = await Listing.findById(req.params.id);
+eventBus.emit('booking.created', { booking: newBooking, user: req.user, listing: listingData });
 req.flash("success","Booking confirmed!");
 
 res.redirect(`/listings/${id}`);

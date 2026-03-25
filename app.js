@@ -5,6 +5,9 @@ if (process.env.NODE_ENV != "production") {
 const express = require("express");
 const app = express();
 
+const eventBus = require('./utils/eventBus');
+require('./services/notificationService')(eventBus);
+
 app.locals.mapToken = process.env.MAP_TOKEN;
 
 
