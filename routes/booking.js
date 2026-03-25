@@ -5,6 +5,25 @@ const Listing = require("../models/listings");
 const { isLoggedIn } = require("../middleware");
 const eventBus = require('../utils/eventBus');
 
+router.get("/my-bookings", isLoggedIn, async (req, res) => {
+  const bookings = await Booking.find({ user: req.user._id })
+    .populate("listing")
+    .sort({ createdAt: -1 });
+  res.render("bookings/my-bookings", { bookings });
+});
+
+router.patch("/:id/cancel", isLoggedIn, async (req, res) => {
+  const booking = await Booking.findById(req.params.id);
+  if (!booking || !booking.user.equals(req.user._id)) {
+    req.flash("error", "Not authorized");
+    return res.redirect("/bookings/my-bookings");
+  }
+  booking.status = "cancelled";
+  await booking.save();
+  req.flash("success", "Booking cancelled");
+  res.redirect("/bookings/my-bookings");
+});
+
 router.post("/:id", isLoggedIn, async (req, res) => {
 
   const { id } = req.params;

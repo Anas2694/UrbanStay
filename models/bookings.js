@@ -34,7 +34,14 @@ total:Number,
 createdAt:{
 type:Date,
 default:Date.now
+},
+
+status: {
+  type: String,
+  enum: ["confirmed", "cancelled"],
+  default: "confirmed"
 }
+
 
 });
 
