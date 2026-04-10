@@ -42,6 +42,7 @@ A full-stack Airbnb-inspired property rental platform built with Node.js, Expres
 * Secure authentication system
 * Cloud-based media storage
 * Interactive map integration
+* CI/CD Pipeline Configured
 
 ---
 
