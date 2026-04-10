@@ -20,7 +20,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Confirm deployment ready
         run: echo "✅ UrbanStay build successful - Render will auto-deploy"
